@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import { push } from 'react-router-redux';
 
 import config from '../config';
 
@@ -25,18 +24,6 @@ export function isUnauthorized(error) {
     return true;
   }
   return false;
-}
-
-export function sendToLogin(dispatch) {
-  dispatch(push('/'));
-}
-
-export function handleHttpError(dispatch, error, errorAction, ...args) {
-  if (isUnauthorized(error)) {
-    sendToLogin(dispatch);
-  } else {
-    dispatch(errorAction(error, ...args));
-  }
 }
 
 export function localRequest(uri, options) {
