@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import App from '../containers/app/app.container';
 
 export default function render(req, res, next) {
-  // create a new history and redux store on each (server side) request
+  // create a new history on each (server side) request
   const history = createMemoryHistory(req.url);
 
   try {
