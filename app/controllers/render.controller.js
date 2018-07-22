@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import createMemoryHistory from 'history/createMemoryHistory';
-import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import { renderToString } from 'react-dom/server';
@@ -29,11 +28,9 @@ export default function render(req, res, next) {
     .then(() => {
       // get the HTML content for our server side rendering
       const htmlContent = renderToString(
-        <Provider store={store}>
-          <StaticRouter history={history} location={req.url} context={{}}>
-            {renderRoutes(routes)}
-          </StaticRouter>
-        </Provider>,
+        <StaticRouter history={history} location={req.url} context={{}}>
+          {renderRoutes(routes)}
+        </StaticRouter>,
       );
 
       // get the state from the store to send it to the client

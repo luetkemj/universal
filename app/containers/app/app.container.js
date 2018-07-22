@@ -1,24 +1,31 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { renderRoutes } from 'react-router-config';
+import { Switch, Route } from 'react-router';
+import { withRouter } from 'react-router-dom';
+
+import Home from '../home/home.container';
+import NoMatch from '../no-match/no-match.container';
+import Page1 from '../page1/page1.container';
+import Page2 from '../page2/page2.container';
 
 import Header from '../../components/header/header.component';
 
 import './app.container.scss';
 
-export default function App(props) {
-  const { route } = props;
-
+function App() {
   return (
     <div>
       <Header />
-      {renderRoutes(route.routes)}
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/page1" component={Page1} />
+        <Route path="/page2" component={Page2} />
+        <Route path="/*" component={NoMatch} />
+      </Switch>
     </div>
   );
 }
 
-App.propTypes = {
-  route: PropTypes.shape({
-    routes: PropTypes.array.isRequired,
-  }).isRequired,
-};
+// this exposes history methods
+// https://reacttraining.com/react-router/web/api/history
+// https://reacttraining.com/react-router/web/api/withRouter
+export default withRouter(App);
