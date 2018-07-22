@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/page1" component={Page1} />
         <Route path="/page2" component={Page2} />
-        <Route path="/*" component={NoMatch} />
+        <Route component={NoMatch} />
       </Switch>
     </div>
   );
