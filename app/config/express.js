@@ -6,7 +6,7 @@ import hook from 'css-modules-require-hook';
 import path from 'path';
 import sass from 'node-sass';
 
-import config from '../config';
+import config from '.';
 
 const APP_ROOT = path.join(__dirname, '../../');
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
