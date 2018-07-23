@@ -45,20 +45,6 @@ function getPlugins() {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
 
-    // https://webpack.js.org/plugins/commons-chunk-plugin
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      // https://webpack.js.org/guides/code-splitting-libraries/#implicit-common-vendor-chunk
-      minChunks: module => module.context && module.context.indexOf('node_modules') !== -1,
-    }),
-
-    // https://webpack.js.org/plugins/commons-chunk-plugin
-    new webpack.optimize.CommonsChunkPlugin({
-      // https://webpack.js.org/plugins/commons-chunk-plugin/#manifest-file
-      name: 'manifest',
-      minChunks: Infinity,
-    }),
-
     // https://github.com/glenjamin/webpack-hot-middleware
     new webpack.HotModuleReplacementPlugin(),
   ];
@@ -142,6 +128,8 @@ function getOutput() {
 }
 
 module.exports = {
+  mode: 'development',
+
   cache: true,
 
   target: 'web',

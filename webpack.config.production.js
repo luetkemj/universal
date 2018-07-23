@@ -1,9 +1,9 @@
 // We need to 'use strict' here because this file isn't compiled with babel
 'use strict'; // eslint-disable-line strict, lines-around-directive
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -32,28 +32,13 @@ function getPlugins() {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
 
-    // https://webpack.js.org/plugins/uglifyjs-webpack-plugin
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      sourceMap: true,
+    // https://github.com/webpack-contrib/mini-css-extract-plugin
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].[hash].min.css',
+      chunkFilename: '[id].[hash].min.css',
     }),
-
-    // https://webpack.js.org/plugins/commons-chunk-plugin
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      // https://webpack.js.org/guides/code-splitting-libraries/#implicit-common-vendor-chunk
-      minChunks: module => module.context && module.context.indexOf('node_modules') !== -1,
-    }),
-
-    // https://webpack.js.org/plugins/commons-chunk-plugin
-    new webpack.optimize.CommonsChunkPlugin({
-      // https://webpack.js.org/plugins/commons-chunk-plugin/#manifest-file
-      name: 'manifest',
-      minChunks: Infinity,
-    }),
-
-    // https://github.com/webpack/extract-text-webpack-plugin
-    new ExtractTextPlugin('[name].min.css'),
   ];
 }
 
@@ -74,10 +59,6 @@ function getLoaders() {
       sourceMap: true,
     },
   };
-  // https://github.com/webpack/extract-text-webpack-plugin
-  const sassLoaders = ExtractTextPlugin.extract({
-    use: [cssLoaderConfig, sassLoaderConfig],
-  });
 
   return [
     {
@@ -98,7 +79,11 @@ function getLoaders() {
     }, {
       test: /(\.scss)$/,
       exclude: /node_modules/,
-      use: sassLoaders,
+      use: [
+        { loader: MiniCssExtractPlugin.loader },
+        cssLoaderConfig,
+        sassLoaderConfig,
+      ],
     },
   ];
 }
@@ -120,11 +105,13 @@ function getOutput() {
   return {
     path: assetsPath,
     publicPath,
-    filename: '[name].min.js',
+    filename: '[name].[hash].min.js',
   };
 }
 
 module.exports = {
+  mode: 'production',
+
   target: 'web',
 
   devtool: 'source-map',
