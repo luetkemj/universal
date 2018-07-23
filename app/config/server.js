@@ -20,6 +20,6 @@ app.listen(config.port, (err) => {
     logger.log(err);
   }
 
-  logger.log(`Express server listening on port ${config.port} ` +
-    `in ${process.env.NODE_ENV} environment`);
+  logger.log(`Express server listening on port ${config.port} `
+    + `in ${process.env.NODE_ENV} environment`);
 });

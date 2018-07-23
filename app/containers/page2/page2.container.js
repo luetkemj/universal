@@ -6,7 +6,9 @@ import style from './page2.container.scss';
 export default function Page2(props) {
   return (
     <div>
-      <h1 className={style.heading}>Page2</h1>
+      <h1 className={style.heading}>
+        Page2
+      </h1>
       <input
         className={style.button}
         type="submit"

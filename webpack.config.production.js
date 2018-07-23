@@ -44,7 +44,8 @@ function getPlugins() {
 
 function getLoaders() {
   // https://github.com/webpack/css-loader
-  const cssLoaderConfig = { loader: 'css-loader',
+  const cssLoaderConfig = {
+    loader: 'css-loader',
     options: {
       sourceMap: true,
       modules: true,
@@ -54,7 +55,8 @@ function getLoaders() {
     },
   };
   // https://github.com/jtangelder/sass-loader
-  const sassLoaderConfig = { loader: 'sass-loader',
+  const sassLoaderConfig = {
+    loader: 'sass-loader',
     options: {
       sourceMap: true,
     },
