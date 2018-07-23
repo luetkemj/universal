@@ -1,6 +1,6 @@
 import React from 'react';
 import createMemoryHistory from 'history/createMemoryHistory';
-import { StaticRouter } from 'react-router';
+import { Router } from 'react-router';
 import { renderToString } from 'react-dom/server';
 
 import App from '../containers/app/app.container';
@@ -11,9 +11,9 @@ export default function render(req, res, next) {
 
   try {
     const htmlContent = renderToString(
-      <StaticRouter history={history} location={req.url} context={{}}>
+      <Router history={history} location={req.url} context={{}}>
         <App />
-      </StaticRouter>,
+      </Router>,
     );
 
     // return the rendered index page with included HTML content
