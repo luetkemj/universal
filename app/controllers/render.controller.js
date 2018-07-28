@@ -38,9 +38,13 @@ export default function render(req, res, next) {
       </ApolloProvider>,
     );
 
+    // https://redux.js.org/recipes/server-rendering#security-considerations
+    const apolloState = JSON.stringify(client.extract()).replace(/</g, '\\u003c');
+
     // return the rendered index page with included HTML content
     return res.render('index', {
       htmlContent,
+      apolloState,
     });
   } catch (err) {
     return next(err);

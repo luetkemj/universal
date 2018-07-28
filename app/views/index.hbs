@@ -13,5 +13,11 @@
 
   <body>
     <section id="app"><div>{{{ htmlContent }}}</div></section>
+
+    {{#if apolloState }}
+    <script type="text/javascript">window.__APOLLO_STATE__ = {{{ apolloState }}}</script>
+    {{/if}}
+
+
   </body>
 </html>
