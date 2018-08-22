@@ -14,3 +14,5 @@ rules:
   no-underscore-dangle: 0
   # https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
   react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
+  # this rule is ridiculous and I don't like it.
+  react/jsx-one-expression-per-line: 0

@@ -4,14 +4,13 @@ An example universal/isomorphic web application.
 
 ## Overview ##
 
-This application is meant to illustrate both client side and server side rendering. The following technologies are included:
+This application is meant to illustrate both client side and server side rendering with React and Apollo. The following technologies are included:
 
 - React
 - React Router 4
-- Redux
 - CSS modules (using Sass)
 - Express
-- Webpack 2
+- Webpack 4
 - Babel
 - ESLint
 
